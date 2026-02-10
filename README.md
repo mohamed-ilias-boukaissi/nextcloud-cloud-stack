@@ -23,6 +23,7 @@ The platform consists of multiple interconnected services:
 - **Collabora Online Server** for document collaboration
 - **Nextcloud Talk (HPB)** for real-time communication
 - **Watchtower** for automated container updates
+
 ![Architecture Diagram](docs/architecture.jpg) 
 ---
 
