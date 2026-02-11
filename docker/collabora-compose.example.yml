@@ -1,0 +1,25 @@
+
+services:
+  collabora:
+    image: collabora/code:latest
+    restart: unless-stopped
+
+    environment:
+      - domain=${NEXTCLOUD_DOMAIN}
+      - username=${NEXTCLOUD_ADMIN_USER}
+      - password=${NEXTCLOUD_ADMIN_PASSWORD}
+      - extra_params=--o:ssl.enable=false --o:ssl.termination=true
+
+    cap_add:
+      - MKNOD
+
+    # Nur intern im Docker-Netzwerk sichtbar, kein Host-Port öffentlich
+    expose:
+      - "9980"
+
+    networks:
+      - nextcloud-net
+
+networks:
+  nextcloud-net:
+    external: true
