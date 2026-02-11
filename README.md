@@ -26,7 +26,25 @@ The platform consists of multiple interconnected services:
 
 ![Architecture Diagram](docs/architecture.jpg) 
 ---
+## Security & Networking Decisions
 
+- **HTTPS-only access for Nextcloud**  
+  Nextcloud is exposed exclusively via port **443** to enforce encrypted access.
+  Unencrypted HTTP access is intentionally disabled.
+
+- **Internal-only services**  
+  PostgreSQL, Redis, Prometheus, Loki, Promtail and the Nextcloud Exporter are
+  only accessible within the Docker network and are not exposed externally.
+
+- **Grafana over HTTP (intentional design choice)**  
+  Grafana is exposed via HTTP and intended for internal access only.
+  In production environments, TLS termination would typically be handled
+  by a reverse proxy or load balancer.
+
+- **Secrets management**  
+  Credentials and sensitive values are injected via environment variables
+  and are not committed to this repository.
+  ---
 ## Features
 - Self-hosted Nextcloud with HTTPS and local domain
 - Fully containerized deployment using Docker
@@ -93,6 +111,16 @@ Sensitive values and secrets are **not included** in this repository.
 - Container isolation between services
 - Separation of application, database, and monitoring components
 - Restricted network access via Docker networking
+
+---
+## Scope & Limitations
+
+This project focuses on a self-hosted, on-premise style deployment.
+It does not include public cloud services (AWS, Azure, GCP),
+CI/CD pipelines, or infrastructure-as-code tools.
+
+The primary goal is to demonstrate practical DevOps and Cloud fundamentals,
+service integration, observability, and secure containerized operations.
 
 ---
 
